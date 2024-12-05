@@ -13,6 +13,10 @@ body{
 overflow-x: hidden;
 }
 
+.imageHead{
+  width: 5em;
+}
+
 .back1 {
   filter: brightness(0.9);
   object-fit: cover;
