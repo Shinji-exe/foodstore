@@ -3,11 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/bootstrap.css">
     <script defer src="./scripts/product.js"></script>
     <title>Nothwind Grocery Store</title>
   </head>
   <body>
- 
-    <footer></footer>
+    <header></header>
+    <main class="container mt-4">
+      <h4>Products</h4>
+      <hr />
+      <div class="d-flex gap-4 my-4">
+        <div class="mb-3 w-25">
+          <label class="form-label" for="shopByTypeSelect">Shop By</label>
+          <select id="shopByTypeSelect" class="form-select">
+            <option value="category">Search By Category</option>
+            <option value="all" selected>View All</option>
+          </select>
+        </div>
+
+        <div class="mb-3 w-25">
+          <label class="form-label" for="categorySelect">Category</label>
+          <select id="categorySelect" class="form-select" onchange="selectCategory()">
+            <option value="">Select...</option>
+          </select>
+        </div>
+      </div>
+
+      <section class="card p-4 bg-light-subtle text-muted">
+        <div id="productsList" class="my-4 d-flex flex-wrap gap-4"></div>
+      </section>
+    </main>
   </body>
 </html>
