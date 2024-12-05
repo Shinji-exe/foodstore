@@ -13,6 +13,10 @@ body{
 overflow-x: hidden;
 }
 
+#inline{
+  display: inline;
+}
+
 .back1 {
   filter: brightness(0.9);
   object-fit: cover;
