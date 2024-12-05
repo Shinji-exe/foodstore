@@ -79,7 +79,7 @@ function createCards(products) {
     cardText2.textContent = `Supplier: ${product.supplier}`;
 
     const cardLink = document.createElement("a");
-    cardLink.href = `productsDetails.html?productId=${product.productId}`;
+    cardLink.href = `productDetail.html?productId=${product.productId}`;
     cardLink.innerText = "See More";
 
     cardBody.appendChild(cardTitle);
