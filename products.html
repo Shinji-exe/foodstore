@@ -5,34 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/bootstrap.css" />
     <link rel="stylesheet" href="./styles/customs.css" />
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <script defer src="./scripts/product.js"></script>
     <title>Nothwind Grocery Store</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
-        <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarColor03">
-            <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link active" href="index.html">Home
-                  <span class="visually-hidden">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="products.html">Products</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-            </ul>
-          </div>
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarColor03"
+          aria-controls="navbarColor03"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor03">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html"
+                >Home
+                <span class="visually-hidden">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="products.html">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+          </ul>
         </div>
-      </nav>
+      </div>
+    </nav>
     <main class="container mt-4">
       <h4>Products</h4>
       <hr />
@@ -51,7 +59,22 @@
             <option value="">Select...</option>
           </select>
         </div>
+
+        <div class="col-auto ">
+            <!-- <button id="searchButton" class="btn btn-primary mt-4">Search</button> -->
+             <label for="sortAlphabetical">Sort: A-Z</label>
+             <input type="radio" name="Sort" id="sortAlphabetical" onclick="changeSort()">
+             <label for="sortAlphabeticalBackwards">Sort: Z-A</label>
+             <input type="radio" name="Sort" id="sortAlphabeticalBackwards" onclick="changeSort()">
+          </div>
       </div>
+
+     <div>
+      <form id="inline" class="d-flex mb-3">
+        <input class="form-control me-sm-2" type="search" placeholder="Search" id="searchInput">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit" onclick="search(event)">Search</button>
+      </form>
+    </div>
 
       <section class="card p-4 bg-light-subtle text-muted">
         <div id="productsList" class="my-4 d-flex flex-wrap gap-4"></div>

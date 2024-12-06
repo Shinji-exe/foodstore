@@ -47,7 +47,9 @@ function createCardForProduct(product) {
 
   const cardSubtitle2 = document.createElement("h6");
   cardSubtitle2.className = "card-subtitle mb-2 text-body-secondary";
-  cardSubtitle2.innerText = product.tableInfo.servingSize;
+  cardSubtitle2.innerText = product?.tableInfo?.servingSize 
+  ? `Serving Size: ${product.tableInfo.servingSize}` 
+  : "Serving Size: Not available";
 
   const cardText = document.createElement("p");
   cardText.className = "card-text";

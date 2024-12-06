@@ -16,6 +16,9 @@ overflow-x: hidden;
 .imageHead{
   width: 5em;
 }
+#inline{
+  display: inline;
+}
 
 .back1 {
   filter: brightness(0.9);
