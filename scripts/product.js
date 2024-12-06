@@ -67,7 +67,7 @@ function createCards(products) {
     if (product.unitsInStock === 0) {
       // const cardText = document.createElement("p");
       // cardText.className = "card-text";
-      cardText.textContent = "Out of Stock!" ;
+      cardText.textContent = "Out of Stock!";
     } else {
       // const cardText = document.createElement("p");
       // cardText.className = "card-text";
@@ -79,7 +79,7 @@ function createCards(products) {
     cardText2.textContent = `Supplier: ${product.supplier}`;
 
     const cardLink = document.createElement("a");
-    cardLink.href = `productsDetails.html?productId=${product.productId}`;
+    cardLink.href = `productDetail.html?productId=${product.productId}`;
     cardLink.innerText = "See More";
 
     cardBody.appendChild(cardTitle);
@@ -99,7 +99,7 @@ async function selectCategory() {
   productCards.innerHTML = "";
   if (idValue) {
     try {
-        // productCards.textContent = "Loading..."
+      // productCards.textContent = "Loading..."
       let promise = fetch("http://localhost:8081/api/products");
       let response = await promise;
       let data = await response.json();
@@ -115,27 +115,62 @@ async function selectCategory() {
   }
 }
 
+async function search(event) {
+    event.preventDefault();  // Prevent form submission and page reload
+    
+    let searchField = document.getElementById("searchInput").value.trim().toLowerCase();
+    const productCards = document.getElementById("productCards"); // Ensure this element exists in your HTML
+  
+    try {
+      productCards.textContent = "Loading..."; // Provide feedback to the user
+      let response = await fetch("http://localhost:8081/api/products");
+  
+      if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status}`);
+      }
+  
+      let data = await response.json();
+      console.log(data);
+  
+      // Use .find() to locate the first matching product
+      let matchingItem = data.find(
+        (item) => item.productName.toLowerCase().includes(searchField)
+      );
+  
+      if (matchingItem) {
+        productCards.textContent = ""; // Clear any previous messages
+        createCards([matchingItem]); // Pass the single match as an array to createCards
+      } else {
+        productCards.textContent = "No products match your search.";
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      productCards.textContent = "Failed to load products. Please try again.";
+    }
+  }
+  
+
 // async function selectCategory() {
 //     let idValue = categoriesId.value;
 //     productCards.innerHTML = ""; // Clear the display initially
-    
+
 //     if (idValue) {
 //       try {
 //         // Display a loading message
 //         productCards.innerHTML = "<p>Loading products...</p>";
-        
+
 //         // Fetch filtered products from the server
 //         let response = await fetch(`http://localhost:8081/api/products`);
 //         let data = await response.json();
-        
+
 //         console.log(data); // Debugging
-  
+
 //         // Filter products based on selected category ID
 //         let filteringItems = data.filter((items) => items.categoryId === idValue);
-        
+
 //         // Clear the loading message
 //         productCards.innerHTML = "";
-  
+
 //         // Handle empty results
 //         if (filteringItems.length === 0) {
 //           productCards.innerHTML = "<p>No products found for this category.</p>";
@@ -157,4 +192,60 @@ async function selectCategory() {
 //       }
 //     }
 //   }
-  
+
+async function sortCards() {
+  // if(sortAlphabetical.checked){
+
+  // }
+  productCards.innerHTML = "";
+  try {
+    let fetching = fetch(`http://localhost:8081/api/products`);
+    let response = await fetching;
+    let data = await response.json();
+    console.log(data);
+    data.sort((a, b) => {
+      if (a.productName < b.productName) {
+        return -1;
+      } else if (a.productName == b.productName) {
+        return 0;
+      } else {
+        return 1;
+      }
+    });
+    createCards(data);
+  } catch (error) {
+    console.log("Error code: ", error.message);
+  }
+}
+
+async function sortCardsBackwards() {
+  productCards.innerHTML = "";
+  try {
+    let fetching = fetch(`http://localhost:8081/api/products`);
+    let response = await fetching;
+    let data = await response.json();
+    console.log(data);
+    data.sort((a, b) => {
+      if (a.productName < b.productName) {
+        return 1;
+      } else if (a.productName == b.productName) {
+        return 0;
+      } else {
+        return -1;
+      }
+    });
+    createCards(data);
+  } catch (error) {
+    console.log("Error code: ", error.message);
+  }
+}
+
+// sortCards()
+
+function changeSort() {
+  if (sortAlphabetical.checked) {
+    sortCards();
+  } else {
+    sortCardsBackwards();
+  }
+}
